@@ -17,9 +17,16 @@ header{
     text-align: center;
     padding-top: 70px;
 }
+@keyframes wachsen{
+    from{height: 0%;}
+    to{height: 100%}
+}
 #main > div > div{    
     background-color: green;
     width: 100px;
+    /* animation-name: wachsen;
+    animation-duration: 1s;
+    animation-delay: 1s; */
 }
 .kategorien{
     display: inline-block;
