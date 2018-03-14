@@ -18,12 +18,14 @@ header{
     padding-top: 70px;
 }
 @keyframes wachsen{
-    from{height: 0%;}
-    to{height: 100%}
+    from{height: 0px;}
+    to{height: 100px}
 }
 #main > div > div{    
     background-color: green;
     width: 100px;
+    height: 0px;
+    
     /* animation-name: wachsen;
     animation-duration: 1s;
     animation-delay: 1s; */
