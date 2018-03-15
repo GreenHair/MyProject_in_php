@@ -69,7 +69,7 @@ require("wochenuebersicht.php");
                 foreach($laeden as $zeile)
                 {
                     print "<tr>"; 
-                    print "<td>".$zeile["name"]."</td>";
+                    print "<td><a href='wochen_laden.php?laden=".$zeile["name"]."'>".$zeile["name"]."</a></td>";
                     $width = $zeile['summe'] * 10;
                     print "<td><div class='kategorien' style='width: ".$width."px'></div>";
                     print number_format($zeile["summe"],2)."€<td>";
