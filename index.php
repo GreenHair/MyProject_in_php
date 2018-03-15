@@ -1,6 +1,6 @@
 <?php
 require("wochenuebersicht.php");
-header('Content-type: text/html; charset=utf-8');
+/* header('Content-type: text/html; charset=utf-8'); */
 ?>
 <!DOCTYPE html>
 <html>
@@ -8,6 +8,18 @@ header('Content-type: text/html; charset=utf-8');
     <meta charset="utf-8" />    
     <title>Haushalt</title>    
     <link rel="stylesheet" type="text/css" media="screen" href="css/style.css" />    
+    <?php
+    print "<style>@keyframes wachsen1{
+        from{height: 0px;}
+        to{height: ".$gesamt_woche."px}}
+        @keyframes wachsen2{
+            from{height: 0px;}
+            to{height".$gesamt_woche_essen."px}}
+        @keyframes wachsen3{
+            from{height: 0px}
+            to{height".$gesamt_woche_sontiges."px}}
+        </style>"
+    ?>
 </head>
 <body>
     <header>Haushalt</header>

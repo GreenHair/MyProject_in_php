@@ -17,18 +17,19 @@ header{
     text-align: center;
     padding-top: 70px;
 }
-@keyframes wachsen{
-    from{height: 0px;}
-    to{height: 100px}
-}
 #main > div > div{    
     background-color: green;
     width: 100px;
-    height: 0px;
-    
-    /* animation-name: wachsen;
-    animation-duration: 1s;
-    animation-delay: 1s; */
+    animation-duration: 2s;
+}
+/* #main > div:first-child > div{
+    animation-name: wachsen1;
+} */
+#main > div:nth-child(2) > div{
+    animation-name: wachsen2;
+}
+#main > div:last-child > div{
+    animation-name: wachsen3;
 }
 .kategorien{
     display: inline-block;
