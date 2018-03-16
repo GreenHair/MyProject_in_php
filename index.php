@@ -23,6 +23,7 @@ require("wochenuebersicht.php");
 </head>
 <body>
     <header>Haushalt</header>
+    <h3>Diese Woche</h3>
     <div id="main">
         <div>
             <?php print number_format($gesamt_woche,2)."€";
@@ -51,7 +52,7 @@ require("wochenuebersicht.php");
         foreach($kategorien as $zeile)
         {
             print "<tr>"; 
-            print "<td>".$zeile["bezeichnung"]."</td>";
+            print "<td><a href='wochen_laden.php?kategorie=".$zeile["bezeichnung"]."'>".$zeile["bezeichnung"]."</a></td>";
             $width = $zeile['summe'] * 10;
             print "<td><div class='kategorien' style='width: ".$width."px'></div>";
             print number_format($zeile["summe"],2)."€<td>";

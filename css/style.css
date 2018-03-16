@@ -4,9 +4,13 @@ header{
     font-size: 3em;
     text-align: center;
 }
+h3{
+    width: 10vw;
+    margin: auto;
+}
 #main{
     margin: auto;
-    width: 50%;
+    width: 70%;
     border: 1px solid black;
     min-height: 20vh;
 }
