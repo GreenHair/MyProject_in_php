@@ -44,4 +44,6 @@ function showTable($ware)
     }
     print "</table>";
 }
+
+$db = null;
 ?>

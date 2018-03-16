@@ -4,6 +4,15 @@ header{
     font-size: 3em;
     text-align: center;
 }
+nav{
+    font-size: 1em;
+}
+nav ul{
+    list-style: none;
+}
+nav ul li{
+    float: right;
+}
 h3{
     width: 10vw;
     margin: auto;
@@ -51,4 +60,7 @@ legend{
 a{
     color: black;
     text-decoration: none;
+}
+a:hover{
+    color: red;
 }

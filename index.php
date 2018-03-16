@@ -23,6 +23,11 @@ require("wochenuebersicht.php");
 </head>
 <body>
     <header>Haushalt</header>
+    <nav>
+        <ul>
+            <li><a href="eintragen.php"><button>Eintragen</button></a></li>
+        </ul>
+    </nav>
     <h3>Diese Woche</h3>
     <div id="main">
         <div>
