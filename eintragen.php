@@ -15,13 +15,10 @@ $kategorieen = $result->fetchAll();
     <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-    <Header>Eintragen</Header>
-    
-    <form action="auswertung.php" method="POST">
-        
-        
+    <Header>Eintragen</Header>    
+    <form action="auswertung.php" method="POST">        
     <table>
-        <tr><td><?php print "<a href='".$_SERVER["HTTP_REFERER"]."'>zurück</a>"; ?></td>
+        <tr><td><?php print "<a href='index.php'>Übersicht</a>"; ?></td>
         <td><input type="reset"></td><td><input type="submit"></td></tr>
         <tr><th>Datum</th><th>Laden</th><th>Person</th><th>Einmalig</th></tr>
         <tr><td><input type="date" name="datum"></td>

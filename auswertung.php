@@ -30,7 +30,8 @@ $befehl = "insert into ausgaben(bezeichnung,betrag,prod_gr,rechnungsnr) values "
 print $result1." rows affected<br>";
 print $result2." rows affected<br>";
 
-print "<a href='".$_SERVER["HTTP_REFERER"]."'>zurück</a>";
+print "<a href='".$_SERVER["HTTP_REFERER"]."'>zurück</a><br>";
+print "<a href='index.php'>Übersicht</a>";
 
  $db = null;
 ?>
