@@ -6,18 +6,21 @@ switch($_REQUEST["Periode"])
         $navbar = "<a href='index.php'><button>Diese Woche</button></a>
         <a href='dashboard.php?Periode=DiesenMonat'><button>Diesen Monat</button></a>
         <a href='dashboard.php?Periode=LetztenMonat'><button>Letzen Monat</button></a>";
+        $titel = "Letzte Woche";
         break;
     case "DiesenMonat": 
         require("diesenmonat.php");
         $navbar = "<a href='index.php'><button>Diese Woche</button></a>
         <a href='dashboard.php?Periode=LetzteWoche'><button>Letzte Woche</button></a>
         <a href='dashboard.php?Periode=LetztenMonat'><button>Letzen Monat</button></a>";
+        $titel = "Diesen Monat";
         break;
     case "LetztenMonat": 
         require("letztenmonat.php");
         $navbar = "<a href='index.php'><button>Diese Woche</button></a>
         <a href='dashboard.php?Periode=LetzteWoche'><button>Letzte Woche</button></a>
         <a href='dashboard.php?Periode=DiesenMonat'><button>Diesen Monat</button></a>";
+        $titel = "Letzten Monat";
         break;
 }
 ?>
@@ -42,7 +45,7 @@ switch($_REQUEST["Periode"])
 </head>
 <body>
     <header>Haushalt</header>
-    <h3>Diese Woche</h3>
+    <h3><?php print $titel ?></h3>
     <nav>
         <!-- <ul>
             <li><a href="eintragen.php"><button>Eintragen</button></a></li>

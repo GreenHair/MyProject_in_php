@@ -52,6 +52,7 @@ h3{
     display: inline-block;
     height: 10px;
     background-color: burlywood;
+    /* max-width: 70%; */
 }
 fieldset{
     width: 80%;
@@ -73,4 +74,7 @@ tr:nth-child(even){
 }
 tr:nth-child(odd){
     background-color: rgb(210,210,210);
+}
+td:nth-child(3n){
+    text-align: right;
 }

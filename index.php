@@ -1,5 +1,40 @@
 <?php
-require("wochenuebersicht.php");
+if(isset($_REQUEST["Periode"]))
+{
+    switch($_REQUEST["Periode"])
+    {
+        case "LetzteWoche": 
+            require("letztewoche.php");
+            $navbar = "<a href='index.php'><button>Diese Woche</button></a>
+            <a href='index.php?Periode=DiesenMonat'><button>Diesen Monat</button></a>
+            <a href='index.php?Periode=LetztenMonat'><button>Letzen Monat</button></a>";
+            $titel = "Letzte Woche";
+            break;
+        case "DiesenMonat": 
+            require("diesenmonat.php");
+            $navbar = "<a href='index.php'><button>Diese Woche</button></a>
+            <a href='index.php?Periode=LetzteWoche'><button>Letzte Woche</button></a>
+            <a href='index.php?Periode=LetztenMonat'><button>Letzen Monat</button></a>";
+            $titel = "Diesen Monat";
+            break;
+        case "LetztenMonat": 
+            require("letztenmonat.php");
+            $navbar = "<a href='index.php'><button>Diese Woche</button></a>
+            <a href='index.php?Periode=LetzteWoche'><button>Letzte Woche</button></a>
+            <a href='index.php?Periode=DiesenMonat'><button>Diesen Monat</button></a>";
+            $titel = "Letzten Monat";
+            break;
+    }
+}
+else
+{
+    require("wochenuebersicht.php");
+    $navbar = "<a href='dashboard.php?Periode=LetzteWoche'><button>Letzte Woche</button></a>
+    <a href='index.php?Periode=DiesenMonat'><button>Diesen Monat</button></a>
+    <a href='index.php?Periode=LetztenMonat'><button>Letzen Monat</button></a>";
+    $titel = "Diese Woche";
+}
+
 /* header('Content-type: text/html; charset=utf-8'); */
 ?>
 <!DOCTYPE html>
@@ -23,14 +58,15 @@ require("wochenuebersicht.php");
 </head>
 <body>
     <header>Haushalt</header>
-    <h3>Diese Woche</h3>
+    <h3><?php print $titel ?></h3>
     <nav>
         <!-- <ul>
             <li><a href="eintragen.php"><button>Eintragen</button></a></li>
         </ul> -->
-        <a href="dashboard.php?Periode=LetzteWoche"><button>Letzte Woche</button></a>
+        <!-- <a href="dashboard.php?Periode=LetzteWoche"><button>Letzte Woche</button></a>
         <a href="dashboard.php?Periode=DiesenMonat"><button>Diesen Monat</button></a>
-        <a href="dashboard.php?Periode=LetztenMonat"><button>Letzen Monat</button></a>
+        <a href="dashboard.php?Periode=LetztenMonat"><button>Letzen Monat</button></a> -->
+        <?php print $navbar; ?>
         <a href="eintragen.php"><button>Eintragen</button></a>
     </nav>
     
