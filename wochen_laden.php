@@ -1,3 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Details</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="css/style.css" />
+    <script src="main.js"></script>
+</head>
+<body>
+ 
 <?php
 require("datenbank.php");
 if(isset($_REQUEST["laden"]))
@@ -71,3 +81,6 @@ function showTable($ware)
 
 $db = null;
 ?>
+   
+   </body>
+</html>

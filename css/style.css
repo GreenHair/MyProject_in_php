@@ -16,15 +16,10 @@ nav ul li{
     float: right;
 }
 h3{
-<<<<<<< HEAD
     /* width: 10vw;
     margin: auto; */
     text-align: center;
-    border: 1px solid black;
-=======
-    width: 20vw;
-    margin: auto;
->>>>>>> 734b7490e2aa14c20c021eec0cef98e936c3a9c1
+    /* border: 1px solid black; */
 }
 #main{
     margin: auto;
@@ -72,4 +67,10 @@ a{
 }
 a:hover{
     color: red;
+}
+tr:nth-child(even){
+    background-color: rgb(240,240,240);
+}
+tr:nth-child(odd){
+    background-color: rgb(210,210,210);
 }

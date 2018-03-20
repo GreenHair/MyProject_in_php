@@ -1,6 +1,25 @@
 <?php
-require("wochenuebersicht.php");
-/* header('Content-type: text/html; charset=utf-8'); */
+switch($_REQUEST["Periode"])
+{
+    case "LetzteWoche": 
+        require("letztewoche.php");
+        $navbar = "<a href='index.php'><button>Diese Woche</button></a>
+        <a href='dashboard.php?Periode=DiesenMonat'><button>Diesen Monat</button></a>
+        <a href='dashboard.php?Periode=LetztenMonat'><button>Letzen Monat</button></a>";
+        break;
+    case "DiesenMonat": 
+        require("diesenmonat.php");
+        $navbar = "<a href='index.php'><button>Diese Woche</button></a>
+        <a href='dashboard.php?Periode=LetzteWoche'><button>Letzte Woche</button></a>
+        <a href='dashboard.php?Periode=LetztenMonat'><button>Letzen Monat</button></a>";
+        break;
+    case "LetztenMonat": 
+        require("letztenmonat.php");
+        $navbar = "<a href='index.php'><button>Diese Woche</button></a>
+        <a href='dashboard.php?Periode=LetzteWoche'><button>Letzte Woche</button></a>
+        <a href='dashboard.php?Periode=DiesenMonat'><button>Diesen Monat</button></a>";
+        break;
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -28,9 +47,10 @@ require("wochenuebersicht.php");
         <!-- <ul>
             <li><a href="eintragen.php"><button>Eintragen</button></a></li>
         </ul> -->
-        <a href="dashboard.php?Periode=LetzteWoche"><button>Letzte Woche</button></a>
+        <!-- <a href="index.php"><button>Diese Woche</button></a>
         <a href="dashboard.php?Periode=DiesenMonat"><button>Diesen Monat</button></a>
-        <a href="dashboard.php?Periode=LetztenMonat"><button>Letzen Monat</button></a>
+        <a href="dashboard.php?Periode=LetztenMonat"><button>Letzen Monat</button></a> -->
+        <?php print $navbar; ?>
         <a href="eintragen.php"><button>Eintragen</button></a>
     </nav>
     
