@@ -29,7 +29,7 @@ if(isset($_REQUEST["Periode"]))
 else
 {
     require("wochenuebersicht.php");
-    $navbar = "<a href='dashboard.php?Periode=LetzteWoche'><button>Letzte Woche</button></a>
+    $navbar = "<a href='index.php?Periode=LetzteWoche'><button>Letzte Woche</button></a>
     <a href='index.php?Periode=DiesenMonat'><button>Diesen Monat</button></a>
     <a href='index.php?Periode=LetztenMonat'><button>Letzen Monat</button></a>";
     $titel = "Diese Woche";
@@ -67,6 +67,7 @@ else
         <a href="dashboard.php?Periode=DiesenMonat"><button>Diesen Monat</button></a>
         <a href="dashboard.php?Periode=LetztenMonat"><button>Letzen Monat</button></a> -->
         <?php print $navbar; ?>
+        <a href="einkommen.php"><button>Einkommen</button></a>
         <a href="eintragen.php"><button>Eintragen</button></a>
     </nav>
     
