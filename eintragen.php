@@ -15,7 +15,6 @@ $kategorieen = $result->fetchAll();
     <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-<<<<<<< HEAD
     <Header>Eintragen</Header>
     <nav>
         <a href='index.php'><button>zurück</button></a>
@@ -28,13 +27,6 @@ $kategorieen = $result->fetchAll();
     <table>
         <tr><!-- <td><?php print "<a href='index.php'>zurück</a>"; ?></td> -->
         <td><input type="reset"></td><td></td><td></td><td><input type="submit"></td></tr>
-=======
-    <Header>Eintragen</Header>    
-    <form action="auswertung.php" method="POST">        
-    <table>
-        <tr><td><?php print "<a href='index.php'>Übersicht</a>"; ?></td>
-        <td><input type="reset"></td><td><input type="submit"></td></tr>
->>>>>>> 734b7490e2aa14c20c021eec0cef98e936c3a9c1
         <tr><th>Datum</th><th>Laden</th><th>Person</th><th>Einmalig</th></tr>
         <tr><td><input type="date" name="datum"></td>
         <td>
