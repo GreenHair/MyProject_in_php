@@ -16,10 +16,15 @@ nav ul li{
     float: right;
 }
 h3{
+<<<<<<< HEAD
     /* width: 10vw;
     margin: auto; */
     text-align: center;
     border: 1px solid black;
+=======
+    width: 20vw;
+    margin: auto;
+>>>>>>> 734b7490e2aa14c20c021eec0cef98e936c3a9c1
 }
 #main{
     margin: auto;
