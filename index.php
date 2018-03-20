@@ -23,12 +23,14 @@ require("wochenuebersicht.php");
 </head>
 <body>
     <header>Haushalt</header>
-    <nav>
-        <ul>
-            <li><a href="eintragen.php"><button>Eintragen</button></a></li>
-        </ul>
-    </nav>
     <h3>Diese Woche</h3>
+    <nav>
+        <!-- <ul>
+            <li><a href="eintragen.php"><button>Eintragen</button></a></li>
+        </ul> -->
+        <a href="eintragen.php"><button>Eintragen</button></a>
+    </nav>
+    
     <div id="main">
         <div>
             <?php print number_format($gesamt_woche,2)."€";
@@ -49,6 +51,7 @@ require("wochenuebersicht.php");
             sontiges
         </div>
     </div>
+    <br>
     <fieldset>
         <legend>Kategorien</legend>
     <div>
@@ -67,6 +70,7 @@ require("wochenuebersicht.php");
         </table>
     </div>
     </fieldset>
+    <br>
     <fieldset>
         <legend>Läden</legend>
         <div>
@@ -84,6 +88,20 @@ require("wochenuebersicht.php");
             ?>
             </table>
         </div>
+    </fieldset>
+    <br>
+    <fieldset>
+        <legend>Wochentage</legend>
+        <table>
+            <tr><th>Tag</th><th>Betrag</th></tr>
+            <?php
+                foreach($wochentag as $zeile)
+                {
+                    print "<tr><td><a href='wochen_laden.php?wochentag=".$zeile['datum']."'>".date("l",strtotime($zeile['datum']))."</a></td>";
+                    print "<td>".number_format($zeile['summe'],2)."</td></tr>";
+                }
+            ?>
+        </table>
     </fieldset>
 </body>
 </html>

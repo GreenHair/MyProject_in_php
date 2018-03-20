@@ -28,6 +28,30 @@ if(isset($_REQUEST["kategorie"]))
     showTable($einkaeufe);
 }
 
+if(isset($_REQUEST["wochentag"]))
+{
+    $datum=$_REQUEST["wochentag"];
+    $befehl = "select laden.id,name from laden
+     join rechnung on rechnung.laden = laden.id
+     where rechnung.datum = ?";
+    $stmt = $db->prepare($befehl);
+    $stmt->execute(array($datum));
+    $shops = $stmt->fetchAll();
+    foreach($shops as $laden)
+    {
+        print "<font size=4em>".$laden['name']."</font>";
+    
+        $befehl = "select rechnung.datum,ausgaben.bezeichnung,ausgaben.betrag from ausgaben
+        join rechnung on rechnung.id = ausgaben.rechnungsnr
+        where rechnung.datum = ?
+        and rechnung.laden = ".$laden['id'];
+        $stmt = $db->prepare($befehl);
+        $stmt->execute(array($datum));
+        $einkaeufe = $stmt->fetchAll();
+        showTable($einkaeufe);
+    }
+}
+
 print "<a href='".$_SERVER['HTTP_REFERER']."'>zurück</a>";
 
 function showTable($ware)

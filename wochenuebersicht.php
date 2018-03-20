@@ -24,5 +24,9 @@ $befehl = "select laden.name, sum(betrag) as summe from ausgaben join rechnung o
 $result = $db->query($befehl);
 $laeden = $result->fetchAll();
 
+$befehl = " select datum, sum(betrag) as summe from ausgaben join rechnung on rechnung.id = ausgaben.rechnungsnr where week(datum,1) = week(current_date,1) group by datum;";
+$result = $db->query($befehl);
+$wochentag = $result->fetchAll();
+
 $db = null;
 ?>

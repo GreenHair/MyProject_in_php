@@ -6,16 +6,20 @@ header{
 }
 nav{
     font-size: 1em;
+    border: 1px solid black;
 }
 nav ul{
     list-style: none;
+    margin-right: 5%;
 }
 nav ul li{
     float: right;
 }
 h3{
-    width: 10vw;
-    margin: auto;
+    /* width: 10vw;
+    margin: auto; */
+    text-align: center;
+    border: 1px solid black;
 }
 #main{
     margin: auto;
