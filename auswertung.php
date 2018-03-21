@@ -37,7 +37,7 @@ else
     print "Keine Daten zum Eintragen<br>";
 }
 
-print "<a href='".$_SERVER["HTTP_REFERER"]."'>zurück</a>";
+print "<a href='".$_SERVER["HTTP_REFERER"]."'>zurück</a><br>";
 print "<a href='index.php'>Übersicht</a>";
 
  $db = null;

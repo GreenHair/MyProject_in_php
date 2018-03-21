@@ -73,7 +73,7 @@ function showTable($ware)
         print "<tr>";
         print "<td>".date("l d-m-y",strtotime($zeile['datum']))."</td>";
         print "<td>".$zeile['bezeichnung']."</td>";
-        print "<td>".$zeile['betrag']."</td>";
+        print "<td>".number_format($zeile['betrag'],2)."€</td>";
         print "</tr>";
     }
     print "</table>";
