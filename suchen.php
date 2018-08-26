@@ -23,14 +23,19 @@
 <body>
     <header>Haushalt</header>
     <h3>Suchen</h3>
-    <nav>
-        <a href="index.php"><button>Diese Woche</button></a>
-        <a href='index.php?Periode=LetzteWoche'><button>Letzte Woche</button></a>
-        <a href='index.php?Periode=DiesenMonat'><button>Diesen Monat</button></a>
-        <a href='index.php?Periode=LetztenMonat'><button>Letzen Monat</button></a>
-        <a href="index.php?einkommen"><button>Einkommen</button></a>
-        <a href="index.php?eintragen"><button>Eintragen</button></a>
-        <a href="index.php?logout"><button>Logout</button></a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <a class='navbar-brand' href="index.php">Diese Woche</a>
+        <a class='navbar-brand' href='index.php?Periode=LetzteWoche'>Letzte Woche</a>
+        <a class='navbar-brand' href='index.php?Periode=DiesenMonat'>Diesen Monat</a>
+        <a class='navbar-brand' href='index.php?Periode=LetztenMonat'>Letzen Monat</a>
+        <a class='navbar-brand' href="index.php?einkommen">Einkommen</a>
+        <a class='navbar-brand' href="index.php?eintragen">Eintragen</a>
+        <a class='navbar-brand' href="index.php?logout">Logout</a>
+    </div>
     </nav>
     <div class="container">
     <form action="" method="POST">

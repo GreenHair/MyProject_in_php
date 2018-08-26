@@ -18,6 +18,15 @@
               <div class="form-group col-md-9">
                 <label for="modal_bezeichnung">Bezeichnung</label>
                 <input type="text" class="form-control" name = "bezeichnung" id="modal_bezeichnung" placeholder="">
+                <label class="col-form-label" for="kategorie">Kategorie</label>
+                <select name="kategorie" class="custom-select mr-sm-2" id="update_kategorie">
+                    <?php
+                    $kategorieen = GetKategorieen($db);
+                    foreach ($kategorieen as $cat) {
+                      print "<option value='" . $cat['ID'] . "'>" . $cat['bezeichnung'] . "</option>";
+                    }
+                    ?>
+                </select>
               </div>
               <div class="form-group col-md-3">
                 <label for="modal_betrag">Betrag</label>

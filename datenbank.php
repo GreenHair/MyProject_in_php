@@ -45,4 +45,16 @@ function GetKategorieen($db)
 	$kategorie = $result->fetchAll();
 	return $kategorie;
 }
+
+function GetBalance($db,$month)
+{
+	$sql = "SELECT (SELECT SUM(einkommen.betrag) FROM einkommen WHERE MONTH(datum) = ? AND YEAR(datum) = YEAR(CURRENT_DATE)) - SUM(ausgaben.betrag) as balance from ausgaben
+	JOIN rechnung ON rechnung.id = ausgaben.rechnungsnr
+	WHERE MONTH(rechnung.datum) = ? AND
+	YEAR(rechnung.datum) = YEAR(CURRENT_DATE)";
+	$stmt = $db->prepare($sql);
+	$stmt->execute(array($month,$month));
+	$result = $stmt->fetch(PDO::FETCH_ASSOC);
+	return $result["balance"];
+}
 ?>

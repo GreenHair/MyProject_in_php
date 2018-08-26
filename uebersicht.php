@@ -3,14 +3,20 @@ if (isset($_REQUEST["Periode"])) {
     switch ($_REQUEST["Periode"]) {
         case "LetzteWoche":
             $abschnitt = "LetzteWoche";
+            $bilanz_visibility = "hidden";
             require("wochenuebersicht.php");
-            $navbar = "<li class='nav-item'><a class='navbar-brand' href='index.php'>Diese Woche</a></li>
+     /*       $navbar = "<li class='nav-item'><a class='navbar-brand' href='index.php'>Diese Woche</a></li>
             <li class='nav-item'><a class='navbar-brand' href='index.php?Periode=DiesenMonat'>Diesen Monat</a></li>
             <li class='nav-item'><a class='navbar-brand' href='index.php?Periode=LetztenMonat'>Letzen Monat</a></li>";
-            $titel = "Letzte Woche";
+       */ $navbar = "<a class='navbar-brand' href='index.php'>Diese Woche</a>
+       <a class='navbar-brand' href='index.php?Periode=DiesenMonat'>Diesen Monat</a>
+       <a class='navbar-brand' href='index.php?Periode=LetztenMonat'>Letzen Monat</a>";
+           $titel = "Letzte Woche";
             break;
         case "DiesenMonat":
             $abschnitt = "DiesenMonat";
+            $bilanz_visibility = "visible";
+            $month = date("m");
             require("wochenuebersicht.php");
             $navbar = "<a class='navbar-brand' href='index.php'>Diese Woche</a>
             <a class='navbar-brand' href='index.php?Periode=LetzteWoche'>Letzte Woche</a>
@@ -19,6 +25,8 @@ if (isset($_REQUEST["Periode"])) {
             break;
         case "LetztenMonat":
             $abschnitt = "LetztenMonat";
+            $bilanz_visibility = "visible";
+            $month = date("m") - 1;
             require("wochenuebersicht.php");
             $navbar = "<a class='navbar-brand'  href='index.php'>Diese Woche</a>
             <a class='navbar-brand'  href='index.php?Periode=LetzteWoche'>Letzte Woche</a>
@@ -28,6 +36,7 @@ if (isset($_REQUEST["Periode"])) {
     }
 } else {
     $abschnitt = "DieseWoche";
+    $bilanz_visibility = "hidden";
     require("wochenuebersicht.php");
     $navbar = "<a class='navbar-brand'  href='index.php?Periode=LetzteWoche'>Letzte Woche</a>
     <a class='navbar-brand'  href='index.php?Periode=DiesenMonat'>Diesen Monat</a>
@@ -50,15 +59,26 @@ if (isset($_REQUEST["Periode"])) {
     <link rel="stylesheet" type="text/css" media="screen" href="css/style.css" /> 
     
     <?php
-    print "<style>@keyframes wachsen1{
-        from{height: 0px;}
-        to{height: " . $gesamt_woche . "px}}
-        @keyframes wachsen2{
+    print "<style>
+        @keyframes wachsen1{
             from{height: 0px;}
-            to{height" . $gesamt_woche_essen . "px}}
-        @keyframes wachsen3{
-            from{height: 0px}
-            to{height" . $gesamt_woche_sontiges . "px}}
+            to{height: " . $gesamt_woche . "px}}
+            @keyframes wachsen2{
+                from{height: 0px;}
+                to{height" . $gesamt_woche_essen . "px}}
+            @keyframes wachsen3{
+                from{height: 0px}
+                to{height" . $gesamt_woche_sontiges . "px}}
+
+        .bilanz{
+            visibility:$bilanz_visibility;
+        }
+        .positiv{
+            color:green;
+        }
+        .negativ{
+            color:red;
+        }
         </style>"
     ?>
     
@@ -68,27 +88,21 @@ if (isset($_REQUEST["Periode"])) {
     <header>Haushalt</header>
     <h3><?php print $titel ?></h3>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class='navbar-brand' href="index.php?eintragen">Eintragen</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav">
-            <!-- <ul>
-                <li><a href="eintragen.php"><button>Eintragen</button></a></li>
-            </ul> -->
-            <!-- <a href="dashboard.php?Periode=LetzteWoche"><button>Letzte Woche</button></a>
-            <a href="dashboard.php?Periode=DiesenMonat"><button>Diesen Monat</button></a>
-            <a href="dashboard.php?Periode=LetztenMonat"><button>Letzen Monat</button></a> -->
+        <!--<ul class="navbar-nav">-->
+            
             <?php print $navbar; ?>
             <a class='navbar-brand' href="index.php?einkommen">Einkommen</a>
-            </ul>
-        </div>
+         <!--   </ul> -->
+        
             
-            
+            <a class='navbar-brand' href="index.php?eintragen">Eintragen</a>
             <a class='navbar-brand' href="index.php?suchen">Suchen</a>
             <a class='navbar-brand' href="index.php?logout">Logout</a>
-        
+        </div>
     </nav>
     
     <div id="main">
@@ -109,6 +123,10 @@ if (isset($_REQUEST["Periode"])) {
             print "<div style='height: " . $gesamt_woche_sontiges . "px'></div>";
             ?>
             sontiges
+        </div>
+        <div class="bilanz">
+            Bilanz:
+            <span class=<?php echo $bilanz > 0 ? "'positiv'" : "'negativ'"; ?>><?php print number_format($bilanz,2) ?>€</span>
         </div>
     </div>
     <br>
@@ -175,7 +193,9 @@ if (isset($_REQUEST["Periode"])) {
    
     <script>
         $(document).ready(function() {
-            $('#woche').DataTable();
+            $('#woche').DataTable({
+                "ordering" : false
+            });
         });
 </script>
 </body>

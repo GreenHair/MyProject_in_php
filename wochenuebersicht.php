@@ -1,6 +1,7 @@
 <?php
 require_once("datenbank.php");
 $periode = "";
+$bilanz = 0;
 if(isset($_REQUEST["Periode"]))
 {
     switch($_REQUEST["Periode"])
@@ -13,9 +14,11 @@ if(isset($_REQUEST["Periode"]))
             break;
         case "DiesenMonat": 
             $periode = "month(datum) = month(current_date) and year(rechnung.datum) = year(current_date)";
+            $bilanz = GetBalance($db,date("m"));
             break;
         case "LetztenMonat": 
             $periode = "month(datum) = month(current_date)-1 and year(rechnung.datum) = year(current_date)";
+            $bilanz = GetBalance($db,date("m")-1);
             break;
     }
 }
