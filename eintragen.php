@@ -108,7 +108,7 @@ $kategorieen = GetKategorieen($db);
         
         <div class="form-row">
             <div class="col-6">
-                <label>Bezeichnung</lablel>
+                <label>Bezeichnung</label>
             </div>
             <div class="col-3">
                 <label>Preis</label>

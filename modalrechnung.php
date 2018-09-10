@@ -38,7 +38,7 @@
            <div class="form-row">
             <div class="form-group col-md-6">
               <label class="col-form-label" for="update_datum">Datum</label>
-              <input type="text" id="update_datum" class="form-control datepicker" name="datum" value="Datum auswählen">        
+              <input type="text" id="update_datum" class="form-control datepicker" name="update_datum" value="Datum auswählen">        
              </div>
              <div class="custom-control custom-checkbox" style='margin-top:35px'>
               <input type="checkbox" name="einmal" value="1" class="custom-control-input" id="update_einmalig">
@@ -54,10 +54,10 @@
           <div class="collapse" id="collapseExample">
           <div class="form-row">
               <div class="form-group col-md-9">
-                <label for="modal_bezeichnung">Bezeichnung</label>
-                <input type="text" class="form-control" name = "bezeichnung" id="modal_bezeichnung" placeholder="">
+                <label for="extra_bezeichnung">Bezeichnung</label>
+                <input type="text" class="form-control" name = "extra_bezeichnung" id="extra_bezeichnung" placeholder="">
                 <label class="col-form-label" for="kategorie">Kategorie</label>
-                <select name="kategorie" class="custom-select mr-sm-2" id="update_kategorie">
+                <select name="extra_kategorie" class="custom-select mr-sm-2" id="extra_kategorie">
                     <?php
                     $kategorieen = GetKategorieen($db);
                     foreach ($kategorieen as $cat) {
@@ -67,8 +67,8 @@
                 </select>
               </div>
               <div class="form-group col-md-3">
-                <label for="modal_betrag">Betrag</label>
-                <input type="text" class="form-control" name="betrag" id="modal_betrag" placeholder="">
+                <label for="extra_betrag">Betrag</label>
+                <input type="text" class="form-control" name="extra_betrag" id="extra_betrag" placeholder="">
               </div>
             </div>
           </div>           
