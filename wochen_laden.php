@@ -185,12 +185,12 @@ function showTable($ware)
         print "<td>" . $zeile['kategorie'] . "</td><td>" . $zeile['a_id'] . "</td>";
         print "<td>" . date("l d-m-y", strtotime($zeile['datum'])) . "</td>";
         print "<td>" . $zeile['bezeichnung'] . "</td>";
-        print "<td>" . number_format($zeile['betrag'], 2) . "€</td>";
+        print "<td>" . number_format($zeile['betrag'], 2,",",".") . "€</td>";
         print "<td><button type='button' data-toggle='modal' data-target='#modal_update' class='btnEdit' style='margin-left:20px'><i class='material-icons'>edit</i></button></td>";
         print "</tr>";
         $summe += $zeile['betrag'];
     }
-    print "<tr><td></td><td></td><td></td><td>Gesamt</td><td>" . number_format($summe, 2) . "€</td><td></td></tr>
+    print "<tr><td></td><td></td><td></td><td>Gesamt</td><td>" . number_format($summe, 2,",",".") . "€</td><td></td></tr>
     </tbody>
     </table>
     <br>";
@@ -230,22 +230,17 @@ $db = null;
             table.$('tr.selected').removeClass('selected');
             $(this).addClass('selected');
         }
-        } );
-
-        $('#modal_update').on('show.bs.modal',function(e){
-            console.log(e);
-            $('#update_kategorie').find('option[selected="selected"]').removeAttr('selected');
-        });
+        } )
 
         $('#modal_update').on('shown.bs.modal',function(e){
-            
+            $('#update_kategorie').find('option[selected="selected"]').removeAttr('selected');
             var data = table.rows('.selected').data();
             console.log(data);
             $('#modal_a_id').val(data[0].a_id);
             $('#modal_bezeichnung').val(data[0].bezeichnung);
-            $('#modal_betrag').val(data[0].betrag);
+            $('#modal_betrag').val(data[0].betrag.replace("€",""));
             $('#update_kategorie').find('option[value=' + data[0].kategorie + ']').attr('selected','selected');
-            console.log(data[0].bezeichnung);
+            console.log(data[0].betrag.replace("€",""));
         });
 
         $('#update_datum').datepicker({

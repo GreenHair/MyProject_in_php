@@ -10,15 +10,24 @@ if(isset($_REQUEST["Periode"]))
             $periode = "week(rechnung.datum,1) = week(current_date,1) and year(rechnung.datum) = year(current_date)";
             break;
         case "LetzteWoche": 
-            $periode = "week(rechnung.datum,1) = week(current_date,1)-1 and year(rechnung.datum) = year(current_date)";
+            if(date("W") > 1){
+                $periode = "week(rechnung.datum,1) = week(current_date,1)-1 and year(rechnung.datum) = year(current_date)";
+            }else{
+                $periode = "WEEK(rechnung.datum,1) = 52 and YEAR(rechnung.datum) = YEAR(CURRENT_DATE)-1";
+            }
             break;
         case "DiesenMonat": 
             $periode = "month(datum) = month(current_date) and year(rechnung.datum) = year(current_date)";
             $bilanz = GetBalance($db,date("m"));
             break;
         case "LetztenMonat": 
-            $periode = "month(datum) = month(current_date)-1 and year(rechnung.datum) = year(current_date)";
-            $bilanz = GetBalance($db,date("m")-1);
+            if(date("m") > 1){
+                $periode = "month(datum) = month(current_date)-1 and year(rechnung.datum) = year(current_date)";
+                $bilanz = GetBalance($db,date("m")-1);
+            }else{
+                $periode = "MONTH(datum) = 12 and YEAR(rechnung.datum) = YEAR(CURRENT_DATE)-1";
+                $bilanz = GetBalance($db,date("m"));
+            }
             break;
     }
 }

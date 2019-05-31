@@ -28,6 +28,9 @@ if (isset($_COOKIE["logincookie"])) {
                 showLoginForm();
                 echo "<div style='margin-left:auto;margin-right:auto;width:210;color:red;border:2px solid red;'>Benutzername oder Passwort sind nicht vorhanden</div>";
             }
+        }else {
+            showLoginForm();
+            echo "<div style='margin-left:auto;margin-right:auto;width:210;color:red;border:2px solid red;'>Benutzername oder Passwort sind nicht vorhanden</div>";
         }
     } else {
         showLoginForm();

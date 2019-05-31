@@ -22,11 +22,13 @@ $kategorieen = GetKategorieen($db);
     <link rel="stylesheet" type="text/css" media="screen" href="https://cdn.datatables.net/1.10.18/css/jquery.dataTables.min.css"/>
     <!-- Bootstrap Date-Picker Plugin -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
-    <link rel="stylesheet" href="css/style.css" />
+    <!-- <link rel="stylesheet" href="css/style.css" /> -->
 </head>
-<body style="padding-left:10px">
-    <Header>Haushalt</Header>
+<body class="pb-5">
+<div class="display-4 text-center mt-5">
+    <h1>Haushalt</h1>
     <h3>Eintragen</h3>
+</div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -62,9 +64,9 @@ $kategorieen = GetKategorieen($db);
         </div>
     </nav>
     <br>
-    <fieldset class="border" style="padding:20px">
-    <legend>Neue Rechnung</legend>
-    <form action="auswertung.php" method="POST">
+    <fieldset class="border rounded container-fluid" style="width:90%">
+    <legend class="w-auto">Neue Rechnung</legend>
+    <form id="neueRechnung">
         <div class="form-row">    
             <div class="col-10">
                 <button class="btn-secondary" type="reset">Zurücksetzen</button>
@@ -74,9 +76,9 @@ $kategorieen = GetKategorieen($db);
             </div>
         </div>
         <div class="form-row">
-            <div class="auto">
+            <div class="col-auto">
                 <label class="col-form-label" for="datum">Datum</label>
-                <input type="text" id="datepicker" class="form-control mr-sm-2 datepicker" name="datum" value="Datum auswählen">
+                <input type="text" id="datepicker" class="form-control mr-sm-2 datepicker pb-2" name="datum" value="Datum auswählen">
             </div>
             <div class="col-3">
                 <label class="col-form-label" for="laden">Laden</label>
@@ -98,8 +100,8 @@ $kategorieen = GetKategorieen($db);
                     ?>
                 </select>
             </div>        
-            <div class="auto">
-                <div class="custom-control custom-checkbox" style='margin-top:35px'>
+            <div class="col-auto">
+                <div class="custom-control custom-checkbox mt-4 pt-3">
                     <input type="checkbox" name="einmal" value="1" checked class="custom-control-input" id="customCheck1">
                     <label class="custom-control-label" for="customCheck1">Einmalig</label>
                 </div>
@@ -120,7 +122,9 @@ $kategorieen = GetKategorieen($db);
         <?php
         for ($i = 0; $i < 30; $i++) {
             print "<div class='form-row'><div class='col-6'><input type='text' class='form-control' name='bezeichnung[]'></div>
-                <div class='col-3'><input type='text' class='form-control' name='preis[]'></div>
+                <div class='col-3'>
+                <div class='input-group'>
+                <div class='input-group-prepend'><div class='input-group-text'>€</div></div><input type='number' step='0.01' class='form-control' name='preis[]'></div></div>
                 <div class='col-3'><select class='custom-select mr-sm-2' name='kat[]'>";
             foreach ($kategorieen as $cat) {
                 print "<option value='" . $cat['ID'] . "'>" . $cat['bezeichnung'] . "</option>";
@@ -131,13 +135,13 @@ $kategorieen = GetKategorieen($db);
     </form>
     </fieldset>
    
- <fieldset>
-    <legend>Einkommen</legend>
+ <fieldset class="border rounded container-fluid pb-2" style="width:90%">
+    <legend class="w-auto">Einkommen</legend>
     <form action="eintragen_einkommen.php" method="POST">
         <div class="form-row" id="einkommen">            
             <div class="col-2">
                 <label>Datum</label>
-                <input type="text" id="datepicker" class="form-control datepicker" name="datum" value="Datum auswählen">
+                <input type="text" id="datepicker" class="form-control datepicker pb-2" name="datum" value="Datum auswählen">
             </div>
             <div class="col-3">
                 <label>Bezeichnung</label>
@@ -157,37 +161,37 @@ $kategorieen = GetKategorieen($db);
                 <label>Betrag</label>
                 <input type='text' name='betrag' class='form-control'>
             </div>
-            <div class="col-2">
-                <button type="submit" class="btn-primary" style='margin-top:35px'>Senden</button>
+            <div class="col-2 pt-2">
+                <button type="submit" class="btn-primary mt-4 pt-1 pb-1">Senden</button>
             </div>
         </div>
     </form>
  </fieldset>
 
- <fieldset  style="padding-left:10px">
-    <legend>Laden</legend>
+ <fieldset class="border rounded container-fluid pb-2" style="width:90%">
+    <legend class="w-auto">Laden</legend>
     <form action="eintragen_einkommen.php" method="POST">
         <label>Name</label>
         <div class="form-row" id="laden">                    
             <div class="col-5">                
                 <input type='text' name='laden_name' class="form-control">
             </div>            
-            <div class="col-2">
+            <div class="col-2 pt-2">
                 <div class="custom-control custom-checkbox">
                     <input type="checkbox" name="online" value="1" class="custom-control-input" id="customCheck2">
                     <label class="custom-control-label" for="customCheck2">Online</label>
                 </div>
             </div>
             <div class="col-5">
-                <button type="submit" class="btn-primary">Senden</button>
+                <button type="submit" class="btn-primary pt-1 pb-1">Senden</button>
             </div>
         </div>
     </form>
     </fieldset>
  
 
- <fieldset>
-    <legend>Kategorie</legend>
+ <fieldset class="border rounded container-fluid pb-2" style="width:90%">
+    <legend class="w-auto">Kategorie</legend>
     <form action="eintragen_einkommen.php" method="POST">
     <label>Bezeichnung</label>
         <div class="form-row" id="laden">            
@@ -195,14 +199,14 @@ $kategorieen = GetKategorieen($db);
                 
                 <input type='text' name='produktgruppe' class="form-control">
             </div>            
-            <div class="col-2">
+            <div class="col-2 pt-2">
                 <div class="custom-control custom-checkbox">
                     <input type="checkbox" name="essen" value="1" class="custom-control-input" id="customCheck3">
                     <label class="custom-control-label" for="customCheck3">Essen</label>
                 </div>
             </div>
             <div class="col-5">
-                <button type="submit" class="btn-primary">Senden</button>
+                <button type="submit" class="btn-primary pt-1 pb-1">Senden</button>
             </div>
         </div>
     </form>
@@ -218,7 +222,8 @@ $kategorieen = GetKategorieen($db);
     }
 ?>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
@@ -228,30 +233,38 @@ $kategorieen = GetKategorieen($db);
     <script>
 
         $(document).ready(function(){
-            $(".eintragen").DataTable({
-                "paging": false,
-                "orderable": false,
-                "searching": false,
-                "info": false,
-                "columns": [
-                { "width": "25%" },
-                { "width": "25%" },
-                { "width": "25%" },
-                { "width": "25%" }
-                ]
-            });
-
             
-
             $('.datepicker').datepicker({
                 "todayHighlight": true,
                 "autoclose": true,
                 "format": "yyyy-mm-dd"
                 
             });
-            var options = { year: 'numeric', month: '2-digit', day: '2-digit' };
-            var date = new Intl.DateTimeFormat('de-DE', options).format;
+            let options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+            let date = new Intl.DateTimeFormat('de-DE', options).format;
             $('.datepicker').val(date(new Date().now));
+
+            $("#neueRechnung").submit(function(evt){
+                evt.preventDefault();
+                var formData = $("#neueRechnung").serialize();
+                console.log(formData);
+                $.ajax({
+                    url: "auswertung.php",
+                    method: "post",
+                    cache: "false",
+                    data: formData
+                }).done(function(result){
+                    console.log("result:",result);
+                    if(result > 0){
+                        alert('Daten erfolgreich eingetragen');
+                        $("#neueRechnung")[0].reset();
+                        $('.datepicker').val(date(new Date().now));
+                        $('.datepicker').first().focus();
+                    }else{
+                        alert('Da hat etwas nicht geklappt...');
+                    }
+                })
+            })
         });
     </script>
 </body>

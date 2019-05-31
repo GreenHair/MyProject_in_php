@@ -1,9 +1,9 @@
 <?php
 try
 {
-    $connString = "mysql:host=192.168.2.113;port=3306;dbname=haushaltsbuch;charset=utf8";
+    $connString = "mysql:host=localhost;port=3306;dbname=haushaltsbuch;charset=utf8";
 
-    $db = new PDO($connString, "auke", "ich");
+    $db = new PDO($connString, "root", "");
 
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 }
@@ -48,7 +48,7 @@ function GetKategorieen($db)
 
 function GetBalance($db,$month)
 {
-	$sql = "SELECT (SELECT SUM(einkommen.betrag) FROM einkommen WHERE MONTH(datum) = ? AND YEAR(datum) = YEAR(CURRENT_DATE)) - SUM(ausgaben.betrag) as balance from ausgaben
+	$sql = "SELECT (SELECT IFNULL(SUM(einkommen.betrag),0) FROM einkommen WHERE MONTH(datum) = ? AND YEAR(datum) = YEAR(CURRENT_DATE)) - SUM(ausgaben.betrag) as balance from ausgaben
 	JOIN rechnung ON rechnung.id = ausgaben.rechnungsnr
 	WHERE MONTH(rechnung.datum) = ? AND
 	YEAR(rechnung.datum) = YEAR(CURRENT_DATE)";

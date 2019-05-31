@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/af-2.3.0/b-1.5.2/b-html5-1.5.2/kt-2.4.0/r-2.2.2/datatables.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
-    <link rel="stylesheet" type="text/css" media="screen" href="css\style.css" />
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="css\style.css" /> -->
     
     <title>Suchen</title>
     <?php 
@@ -21,8 +21,10 @@
     ?>
 </head>
 <body>
-    <header>Haushalt</header>
-    <h3>Suchen</h3>
+    <div class="display-4 text-center mt-5">
+        <h1>Haushalt</h1>
+        <h3>Suchen</h3>
+    </div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -37,6 +39,7 @@
         <a class='navbar-brand' href="index.php?logout">Logout</a>
     </div>
     </nav>
+    <div class="card mx-auto mt-2" style="width:80%">
     <div class="container">
     <form action="" method="POST">
         <div class="form-row">
@@ -105,16 +108,16 @@
                 </select>
                 <label for="rEin">Einmalig</label>
                 <div class="custom-control custom-radio">
-                    <input type="radio" id="customRadio8" name="rEin" value='am' class="custom-control-input" checked>
+                    <input type="radio" id="customRadio8" name="rEin" value='beides' class="custom-control-input" checked>
                     <label class="custom-control-label" for="customRadio8">Beides</label>
                 </div>
                 <div class="custom-control custom-radio">
-                    <input type="radio" id="customRadio9" name="rEin" value='vor' class="custom-control-input">
+                    <input type="radio" id="customRadio9" name="rEin" value='einmalig' class="custom-control-input">
                     <label class="custom-control-label" for="customRadio9">Einmalig</label>
                 </div>
                 <div class="custom-control custom-radio">
-                    <input type="radio" id="customRadio10" name="rEin" value='nach' class="custom-control-input">
-                    <label class="custom-control-label" for="customRadio10">Feste Ausgeben</label>
+                    <input type="radio" id="customRadio10" name="rEin" value='feste_ausgaben' class="custom-control-input">
+                    <label class="custom-control-label" for="customRadio10">Feste Ausgaben</label>
                 </div>
                 
             </div>
@@ -129,7 +132,8 @@
         </div>              
     </form>
     </div>
-    <div id="suchergebnis">
+    </div>
+    <div class="container-fluid" id="suchergebnis">
         <hr>
         <?php
             if(isset($_REQUEST["bez"]))
@@ -145,8 +149,8 @@
                         where ";
                         if(!empty($_REQUEST["bez"]))
                         {
-                            $sql .= "ausgaben.bezeichnung = ?";
-                            $parameters[] = $_REQUEST["bez"];
+                            $sql .= "ausgaben.bezeichnung LIKE ?";
+                            $parameters[] = "%".$_REQUEST["bez"]."%";
                             $hatVorgaenger = true;
                         }
                         if(!empty($_REQUEST["preis"]))
@@ -183,6 +187,19 @@
                         {
                             if($hatVorgaenger){$sql .= " and ";}
                             $sql .= "rechnung.laden = ".$_REQUEST["laden"];
+                            $hatVorgaenger = true;
+                        }
+                        if($_REQUEST["rEin"] != 'beides')
+                        {
+                            if($hatVorgaenger){$sql .= " and ";}
+                            if($_REQUEST["rEin"] == 'einmalig')
+                            {
+                                $sql .= "rechnung.einmalig = 1";
+                            }
+                            else
+                            {
+                                $sql .= "rechnung.einmalig = 0";
+                            }
                         }
                         // echo $sql."<br>";
                         $stmt = $db->prepare($sql);
@@ -202,7 +219,7 @@
                             <td>".$zeile['name']."</td>
                             <td>".$zeile['kat']."</td></tr>";
                         }
-                        echo "</tbody></table></div>";
+                        echo "</tbody><tfoot><tr><th colspan='2'></th><th colspan='3'></th></tr></tfoot></table></div>";
                 }
             }
         ?>
@@ -218,7 +235,40 @@
     
     <script>
         $(document).ready(function() {
-            $('#tableResult').DataTable();
+            $('#tableResult').DataTable({
+                "footerCallback": function ( row, data, start, end, display ) {
+                    var api = this.api(), data;
+        
+                    // Remove the formatting to get integer data for summation
+                    var intVal = function ( i ) {
+                        return typeof i === 'string' ?
+                            i.replace(/[\€,]/g, '').replace(",",".")*1 :
+                            typeof i === 'number' ?
+                                i : 0;
+                    };
+        
+                    // Total over all pages
+                    total = api
+                        .column( 2 )
+                        .data()
+                        .reduce( function (a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0 );
+        
+                    // Total over this page
+                    pageTotal = api
+                        .column( 2, { page: 'current'} )
+                        .data()
+                        .reduce( function (a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0 );
+        
+                    // Update footer
+                    $( api.column( 2 ).footer() ).html(
+                        new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(pageTotal) +' ( '+ new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(total) +' total)'
+                    );
+                }
+            });
         });
 
         $('.date').datepicker({

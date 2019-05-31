@@ -30,7 +30,12 @@
               </div>
               <div class="form-group col-md-3">
                 <label for="modal_betrag">Betrag</label>
-                <input type="text" class="form-control" name="betrag" id="modal_betrag" placeholder="">
+                <div class='input-group'>
+                  <div class='input-group-prepend'>
+                    <div class='input-group-text'>€</div>
+                  </div>
+                  <input type="number" step="0.01" class="form-control" name="betrag" id="modal_betrag" placeholder="">
+                </div>
               </div>
             </div>
           </div>

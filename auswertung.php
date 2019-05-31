@@ -22,7 +22,8 @@ if(!empty($_REQUEST["datum"]) && !empty($_REQUEST["bezeichnung"]))
         {
             $befehl .= "(?,?,?,last_insert_id()),";
             $werte[] = $_REQUEST["bezeichnung"][$i];
-            $werte[] = str_ireplace(",",".",$_REQUEST["preis"][$i]);
+            // $werte[] = str_ireplace(",",".",$_REQUEST["preis"][$i]);
+            $werte[] = $_REQUEST["preis"][$i];
             $werte[] = $_REQUEST["kat"][$i];
         }
     }
@@ -48,7 +49,7 @@ if(!empty($_REQUEST["datum"]) && !empty($_REQUEST["bezeichnung"]))
     $sql = "UPDATE ausgaben SET bezeichnung = ?, betrag = ?, prod_gr = ? WHERE ID = ?";
     $stmt = $db->prepare($sql);
     $updateResult = $stmt->execute(array($bezeichnung,$preis,$prod_gr,$a_id));
-    if(updateResult){
+    if($updateResult){
         reloadPage();
     }
     else{
@@ -59,7 +60,7 @@ if(!empty($_REQUEST["datum"]) && !empty($_REQUEST["bezeichnung"]))
     $laden = $_REQUEST["laden"];
     $datum = $_REQUEST["update_datum"];
     $person = $_REQUEST["person"];
-    $einmalig = $_REQUEST["einmal"];
+    $einmalig = empty($_REQUEST["einmal"])? 0 : 1;
     $sql = "UPDATE rechnung SET laden = ?, datum = ?, person = ?, einmalig = ? WHERE id = ?";
     $stmt = $db->prepare($sql);
     $updateResult = $stmt->execute(array($laden,$datum,$person,$einmalig,$r_id));
@@ -95,9 +96,10 @@ else
 
 function insertResult($intResult)
 {
-    echo "<script>
-        location.href = './eintragen.php?result=$intResult';
-    </script>";
+    // echo "<script>
+    //     location.href = './eintragen.php?result=$intResult';
+    // </script>";
+    echo $intResult;
 }
 
 function reloadPage()
