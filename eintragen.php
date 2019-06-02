@@ -237,7 +237,7 @@ $kategorieen = GetKategorieen($db);
             $('.datepicker').datepicker({
                 "todayHighlight": true,
                 "autoclose": true,
-                "format": "yyyy-mm-dd"
+                "format": "dd.mm.yyyy"
                 
             });
             let options = { year: 'numeric', month: '2-digit', day: '2-digit' };

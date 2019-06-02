@@ -163,14 +163,14 @@ if (isset($_REQUEST["wochentag"])) {
         $stmt = $db->prepare($befehl);
         $stmt->execute(array($datum));
         $einkaeufe = $stmt->fetchAll();
-        $data = json_encode(array('id' => $einkaeufe[0]['r_id'], 'laden' => $einkaeufe[0]["laden"], 'datum' => $einkaeufe[0]['datum'], 'person' => $einkaeufe[0]['person'], 'einmalig' => $einkaeufe[0]['einmalig']));
+        $data = json_encode(array('id' => $einkaeufe[0]['r_id'], 'laden' => $einkaeufe[0]["laden"], 'datum' => date("d.m.Y", strtotime($einkaeufe[0]['datum'])), 'person' => $einkaeufe[0]['person'], 'einmalig' => $einkaeufe[0]['einmalig']));
         echo "<button type='button' data-toggle='modal' data-target='#modal_update_rechnung' onclick='displayRechnungsdata($data)' class='btnEdit' style='margin-left:20px'><i class='material-icons'>edit</i></button>";
         showTable($einkaeufe);
         echo "</fieldset>";
     }
 }
 
-print "<a href='" . $_SERVER['HTTP_REFERER'] . "'><button>zurück</button></a>";
+print "<a href='index.php'><button>zurück</button></a>";
 
 function showTable($ware)
 {
@@ -238,13 +238,13 @@ $db = null;
             console.log(data);
             $('#modal_a_id').val(data[0].a_id);
             $('#modal_bezeichnung').val(data[0].bezeichnung);
-            $('#modal_betrag').val(data[0].betrag.replace("€",""));
+            $('#modal_betrag').val(data[0].betrag.replace("€","").replace(",","."));
             $('#update_kategorie').find('option[value=' + data[0].kategorie + ']').attr('selected','selected');
             console.log(data[0].betrag.replace("€",""));
         });
 
         $('#update_datum').datepicker({
-            "format": "yyyy-mm-dd"
+            "format": "dd.mm.yyyy"
         });
 
     });

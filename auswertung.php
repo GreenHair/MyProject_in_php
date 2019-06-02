@@ -44,8 +44,8 @@ if(!empty($_REQUEST["datum"]) && !empty($_REQUEST["bezeichnung"]))
     $a_id = $_REQUEST["a_id"];
     $bezeichnung = $_REQUEST["bezeichnung"];
     $prod_gr = $_REQUEST["kategorie"];
-    $preis = str_ireplace('€','',$_REQUEST["betrag"]); 
-    $preis = str_ireplace(',','.',$preis);    
+    $preis = $_REQUEST["betrag"]; 
+    // $preis = str_ireplace(',','.',$preis);    
     $sql = "UPDATE ausgaben SET bezeichnung = ?, betrag = ?, prod_gr = ? WHERE ID = ?";
     $stmt = $db->prepare($sql);
     $updateResult = $stmt->execute(array($bezeichnung,$preis,$prod_gr,$a_id));
@@ -58,7 +58,7 @@ if(!empty($_REQUEST["datum"]) && !empty($_REQUEST["bezeichnung"]))
 }else if(isset($_REQUEST["update_rechnung"])){
     $r_id = $_REQUEST["r_id"];
     $laden = $_REQUEST["laden"];
-    $datum = $_REQUEST["update_datum"];
+    $datum = date("Y-m-d", strtotime($_REQUEST["update_datum"]));
     $person = $_REQUEST["person"];
     $einmalig = empty($_REQUEST["einmal"])? 0 : 1;
     $sql = "UPDATE rechnung SET laden = ?, datum = ?, person = ?, einmalig = ? WHERE id = ?";
@@ -68,8 +68,8 @@ if(!empty($_REQUEST["datum"]) && !empty($_REQUEST["bezeichnung"]))
     if(!empty($_REQUEST["extra_bezeichnung"]) && !empty($_REQUEST["extra_betrag"])){
         $bezeichnung = $_REQUEST["extra_bezeichnung"];
         $prod_gr = $_REQUEST["extra_kategorie"];
-        $preis = str_ireplace('€','',$_REQUEST["extra_betrag"]); 
-        $preis = str_ireplace(',','.',$preis);
+        $preis = $_REQUEST["extra_betrag"]; 
+        // $preis = str_ireplace(',','.',$preis);
         $sql = "INSERT INTO ausgaben (bezeichnung,betrag,prod_gr,rechnungsnr) VALUES (?,?,?,?)";
         $stmt = $db->prepare($sql);
         $insertResult = $stmt->execute(array($bezeichnung,$preis,$prod_gr,$r_id));
