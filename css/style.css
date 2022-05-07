@@ -28,33 +28,42 @@ h3{
     margin: auto;
     width: 70%;
     border: 1px solid black;
-    min-height: 20vh;
+    min-height: 35vh;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-evenly;
 }
 #main > div{
-    display: inline-block;
+    /* display: inline-block;
     margin-left: 7%;
-    margin-right: 7%;
+    margin-right: 7%; */
     text-align: center;
-    padding-top: 70px;
+    /* padding-top: 70px; */
 }
 #main > div > div{    
     background-color: green;
     width: 100px;
+    max-width: 6vw;
+    min-width: 3.4em;
     animation-duration: 2s;
-    bottom: 0%;
+    /* bottom: 0%; */
 }
-/*#main > div:first-child > div{
+#main > div:first-child > div{
     animation-name: wachsen1;
-} */
+    /* animation-iteration-count: infinite; */
+} 
 #main > div:nth-child(2) > div{
     animation-name: wachsen2;
+    /* animation-iteration-count: infinite; */
 }
 #main > div:nth-child(3) > div{
     animation-name: wachsen3;
+    /* animation-iteration-count: infinite; */
 }
 .kategorien{
     display: inline-block;
-    height: 10px;
+    height: 13px;
+    margin-top: 2px;
     background-color: burlywood;
     /* max-width: 70%; */
 }
@@ -64,6 +73,9 @@ fieldset{
     border:1px solid black;
     border-radius:10px;
     padding: 20px;
+}
+fieldset div{
+    overflow: hidden;
 }
 legend{
     font-size: 1.2em;
@@ -88,6 +100,11 @@ td:nth-child(3n){
 }
 td:nth-child(4n){
     margin-left:10px;
+}
+td:nth-child(2n){
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
 }
 .suchen ul{
     list-style: none;

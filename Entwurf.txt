@@ -1,0 +1,31 @@
+Haushaltsbuch api
+GET
+//haushaltsbuch/artikel/artikel_id
+//haushaltsbuch/rechnung/rechung_id
+//haushaltsbuch/rechnung/woche/ => aktuelle woche
+//haushaltsbuch/rechnung/woche/1 => aktuelle woche minus 1 (also vorherige woche)
+//haushaltsbuch/rechnung/monat => aktuelle monat
+//haushaltsbuch/rechnung/monat/1 aktuelle monat minus 1 (also vorherige monat)
+//haushaltsbuch/rechnung/jahr
+//haushaltsbuch/rechnung/jahr/1 => aktuelles jahr minus 1
+
+
+
+Alle Rechnungen im Zeitraum, Alle artikel per Rechnung
+Ausgehend von heute datum zurückrechnen, (1 monat vorher, 2 monate vorher)
+Jahr enthält summe ausgaben und einkommen pro person und gesamt
+
+
+ 
+GET, POST, PUT, DELETE
+//haushaltsbuch/einkommen
+//haushaltsbuch/einkommen/1 => aktuelle monat minus 1
+Einkommen gesamt und pro person pro monat
+
+//haushaltsbuch/läden/[id]
+//haushaltsbuch/kategorien/[id]
+
+//haushaltsbuch/rechnung/[rechung_id]
+//haushaltsbuch/artikel/[artikel_id]
+
+//haushaltsbuch/person/[id]

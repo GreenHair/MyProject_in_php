@@ -1,6 +1,6 @@
 <?php
 require("datenbank.php");
-
+$accessDenied = false;
 if (isset($_COOKIE["logincookie"])) {
     setcookie("logincookie", "Logged in", time() + 1800);
 /*   if(array_key_exists("einkommen",$_REQUEST)){
@@ -11,7 +11,10 @@ if (isset($_COOKIE["logincookie"])) {
         require("suchen.php");
     }elseif(array_key_exists("logout",$_REQUEST)){
         setcookie("logincookie","Logged in", time()-300);
-        showLoginForm();
+        // showLoginForm();
+        $accessDenied = false;
+        $url = createURL($_REQUEST);
+        require("loginpage.php");
     }else{        
         require("uebersicht.php");
     } 
@@ -25,15 +28,24 @@ if (isset($_COOKIE["logincookie"])) {
                // require("uebersicht.php");
                 showPage($db);
             } else {
-                showLoginForm();
-                echo "<div style='margin-left:auto;margin-right:auto;width:210;color:red;border:2px solid red;'>Benutzername oder Passwort sind nicht vorhanden</div>";
+                $accessDenied = true;
+                $url = createURL($_REQUEST);
+                require("loginpage.php");
+                // showLoginForm();
+                // echo "<div style='margin-left:auto;margin-right:auto;width:210;color:red;border:2px solid red;'>Benutzername oder Passwort sind nicht vorhanden</div>";
             }
         }else {
-            showLoginForm();
-            echo "<div style='margin-left:auto;margin-right:auto;width:210;color:red;border:2px solid red;'>Benutzername oder Passwort sind nicht vorhanden</div>";
+            $accessDenied = true;
+            $url = createURL($_REQUEST);
+            require("loginpage.php");
+            // showLoginForm();
+            // echo "<div style='margin-left:auto;margin-right:auto;width:210;color:red;border:2px solid red;'>Benutzername oder Passwort sind nicht vorhanden</div>";
         }
     } else {
-        showLoginForm();
+        $accessDenied = false;
+        $url = createURL($_REQUEST);
+        require("loginpage.php");
+        // showLoginForm();
     }
 }
 
@@ -68,7 +80,10 @@ function showPage($db)
         require("suchen.php");
     } elseif (array_key_exists("logout", $_REQUEST)) {
         setcookie("logincookie", "Logged in", time() - 300);
-        showLoginForm();
+        // showLoginForm();
+        $accessDenied = false;
+        $url = createURL($_REQUEST);
+        require("loginpage.php");
     } else {
         require("uebersicht.php");
     }

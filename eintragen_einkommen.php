@@ -5,9 +5,10 @@ if(!empty($_REQUEST["bezeichnung"]) && !empty($_REQUEST["datum"]))
 {
     print("erster Zweig");
     $betrag = str_ireplace(",",".",$_REQUEST["betrag"]);
+    $datum = date("Y-m-d",strtotime($_REQUEST['datum']));
     $befehl = "insert into einkommen(datum,bezeichnung,person,betrag) values (?,?,?,?)";
     $stmt = $db->prepare($befehl);
-    $stmt->execute(array($_REQUEST["datum"],$_REQUEST["bezeichnung"],$_REQUEST["person"],$betrag));
+    $stmt->execute(array($datum,$_REQUEST["bezeichnung"],$_REQUEST["person"],$betrag));
     
 }
 elseif(!empty($_REQUEST["laden_name"]) )

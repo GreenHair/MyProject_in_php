@@ -124,10 +124,12 @@ if (isset($_REQUEST["Periode"])) {
             ?>
             sontiges
         </div>
-        <div class="bilanz">
-            Bilanz:
-            <span class=<?php echo $bilanz > 0 ? "'positiv'" : "'negativ'"; ?>><?php print number_format($bilanz,2) ?>€</span>
-        </div>
+        <?php
+            if($bilanz_visibility == 'visible'){
+                $classBilanz = $bilanz > 0 ? 'positiv' : 'negativ';
+                echo '<div class="bilanz"> Bilanz: <span class="$classBilanz">' . number_format($bilanz,2) . '€</span></div>';
+            }
+        ?>
     </div>
     <br>
     <fieldset>
@@ -140,7 +142,7 @@ if (isset($_REQUEST["Periode"])) {
             print "<td><a href='wochen_laden.php?kategorie=" . $zeile["bezeichnung"] . "&Periode=" . $abschnitt . "'>" . $zeile["bezeichnung"] . "</a></td>";
             $width = $zeile['summe'] * 10;
             print "<td><div class='kategorien' style='width: " . $width . "px'></div>";
-            print number_format($zeile["summe"], 2) . "€<td>";
+            print "<span>" . number_format($zeile["summe"], 2) . "€</span><td>";
             print "</tr>";
         }
         ?>
@@ -158,7 +160,7 @@ if (isset($_REQUEST["Periode"])) {
                 print "<td><a href='wochen_laden.php?laden=" . $zeile["name"] . "&Periode=" . $abschnitt . "'>" . $zeile["name"] . "</a></td>";
                 $width = $zeile['summe'] * 10;
                 print "<td><div class='kategorien' style='width: " . $width . "px'></div>";
-                print number_format($zeile["summe"], 2) . "€<td>";
+                print "<span>" . number_format($zeile["summe"], 2) . "€</span><td>";
                 print "</tr>";
             }
             ?>

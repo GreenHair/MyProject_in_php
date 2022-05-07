@@ -1,0 +1,3 @@
+[17-Nov-2019 21:53:33 Europe/Berlin] PHP Fatal error:  Allowed memory size of 1073741824 bytes exhausted (tried to allocate 65488 bytes) in C:\xampp\htdocs\MyProject_in_php\api\Database.php on line 25
+[17-Nov-2019 21:54:02 Europe/Berlin] PHP Notice:  initquery defined in C:\xampp\htdocs\MyProject_in_php\api\Database.php on line 27
+[17-Nov-2019 21:54:02 Europe/Berlin] PHP Notice:  utf8 in C:\xampp\htdocs\MyProject_in_php\api\Database.php on line 29
